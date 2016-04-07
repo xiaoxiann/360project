@@ -17,7 +17,3 @@ for line in lines:
 for i in range(len(key)):
     key_ip[key[i]]=ip[i]
 print key_ip
-
-运行结果：
-root@server0 mimi`]# python ifconfig.py
-{'lo': '127.0.0.1', 'ens7': '172.25.254.1', 'eth0': '172.25.254.180'}
