@@ -1,7 +1,4 @@
-利用python的argparse模块，在命令行中指定TCP端口，编写服务器，首先创建一个TCP套接字对，然后设定启用重用地址，这样服务器就可以想运
-行多少次就运行多少次，让服务器在队列中监听多个客户端，最后客户端向服务器发送数据以后，收到数据后，服务器会把数据回显给客户端；
 
-cat server.py
 #!/usr/bin/python
 import socket
 import sys
@@ -31,42 +28,7 @@ if __name__=="__main__":
 	port=given_args.port
 	echo_server(port)
 	
-	客户端代码：
-	#!/usr/bin/env python
-import socket
-import sys
-import argparse
-host='localhost'
-def echo_client(port):
-	sock=socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-	server_address=(host,port)
-	print "connecting to %s port %s"%server_address
-	sock.connect(server_address)
-	try:
-		message="Test message.this will be echoed"
-		print "Sending %s"%message
-		sock.sendall(message)
-		amount_received=0
-		amount_expected=len(message)
-		while amount_received < amount_expected:
-			data=sock.recv(16)
-			amount_received+=len(data)
-			print "received:%s"%data
-	except:
-		print "socket error"
-if __name__=="__main__":
-	parser=argparse.ArgumentParser(description='Socket server Example')
-	parser.add_argument('--port',action="store",dest="port",type=int,required=True)
-	given_args=parser.parse_args()
-	port=given_args.port
-	echo_client(port)
-	
-	运行：
-	python server.py --port=9900
-waiting to receive message from client
-Data:Test message.this will be echoed
-send Test message.this will be echoed bytes back to ('127.0.0.1', 54864)
-waiting to receive message from client
+
 
 	
 	
