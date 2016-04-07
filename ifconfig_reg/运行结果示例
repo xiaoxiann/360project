@@ -1,0 +1,2 @@
+[root@server0 mimi]# python ifconfig.py 
+{'lo': '127.0.0.1', 'ens7': '172.25.254.1', 'eth1': '172.25.254.180'}
