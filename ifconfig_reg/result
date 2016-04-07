@@ -1,3 +1,0 @@
-root@server0 mimi`]# python ifconfig_all.py 
-{'lo': '127.0.0.1', 'ens7': '172.25.254.1', 'eth0': '172.25.254.180'}
-
