@@ -1,0 +1,9 @@
+用python的argparse模块，在命令行中指定TCP端口，编写服务器，首先创建一个TCP套接字对，然后设定启用重用地址，这样服务器就可以想运
+行多少次就运行多少次，让服务器在队列中监听多个客户端，最后客户端向服务器发送数据以后，收到数据后，服务器会把数据回显给客户端；
+
+运行：
+	python server.py --port=9900
+waiting to receive message from client
+Data:Test message.this will be echoed
+send Test message.this will be echoed bytes back to ('127.0.0.1', 54864)
+waiting to receive message from client
