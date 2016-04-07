@@ -1,0 +1,31 @@
+Rrdtool工具是环状数据库的存式，主要用来跟踪对象的变化情况，生成这些变化的走势图，比如系统性能，CPU的利用率。
+可以通过python rrdtool模块实现对CPU使用情况的记录；
+
+rdtool模块常用的方法包括create(创建rrd),update(更新rrd)，graph（绘图）。
+1)采用create方法创建rrd数据库，参数中指定一个rrd文件，更新频率，起始时间，数据源，数据类型等。
+2)采用update方法更新数据库。参数中指定时间戳，以及CPU的利用率，CPU的利用率可以通过psutil模块来获取。
+
+Cat update.py
+#!/usr/bin/python
+#coding=utf-8
+import psutil
+import rrdtool
+import time
+cpu_us=psutil.cpu_times().user
+cpu_sys=psutil.cpu_times().system
+cpu_io=psutil.cpu_times().iowait
+starttime=int(time.time())
+update=rrdtool.update('/home/test/rrdtool/Flow.rrd','%s:%s:%s:%s'%(str(starttime),str(cpu_us),str(cpu_sys),str(cpu_io)))
+print update
+
+代码加入crontab，并配置5分钟为采集频率，crontab配置如下
+*/5 * * * *  /usr/bin/python /home/test/rrdtool/update.py >/dev/null 2>&1
+
+CPU利用率有以下几个部分：
+User time:执行用户进程的时间百分比；
+System time:执行内核进程和中断的时间百分比
+Wait IO: 由于IO等待而使CPU处于idle(空闲)状态的时间百分比
+
+3)采用graph方法绘制图表。
+
+
